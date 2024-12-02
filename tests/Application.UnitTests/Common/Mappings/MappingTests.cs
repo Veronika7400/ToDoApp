@@ -7,6 +7,7 @@ using ToDoApp.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 using ToDoApp.Application.TodoLists.Queries.GetTodos;
 using ToDoApp.Domain.Entities;
 using NUnit.Framework;
+using ToDoApp.Application.TodoItems.Queries.GetTodoItems;
 
 namespace ToDoApp.Application.UnitTests.Common.Mappings;
 
