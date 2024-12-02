@@ -1,0 +1,53 @@
+﻿@page
+@model ToDoApp.Web.Pages.IndexModel
+@{
+    Layout = "_Layout";
+}
+
+@if (TempData.Peek("Errors") is not null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Errors"]
+    </div>
+}
+
+<form method="post" asp-controller="ToDoItem" asp-action="Create">
+    <fieldset>
+        <legend>Add to do</legend>
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="To do title" name="title">
+            <input type="hidden" name="listId" value="1" />
+            <button class="btn btn-outline-secondary" type="submit">Add</button>
+        </div>
+    </fieldset>
+</form>
+    
+@if (Model.Todos.Any())
+{
+    <form method="post" asp-controller="ToDoItem">
+        <div class="list-group">
+            @foreach (var todo in Model.Todos)
+            {
+                <label class="list-group-item d-flex gap-3 strijke">
+                    <input class="form-check-input flex-shrink-0" type="checkbox" value="@todo.Id" style="font-size: 1.375em;" name="id">
+                    <span class="pt-1 form-checked-content">
+                        @if (todo.Done)
+                        {
+                            <s>@todo.Title</s>
+                        }
+                        else
+                        {
+                            <span>@todo.Title</span>
+                        }
+                    </span>
+                </label>
+            }
+        </div>
+
+        <div class="mt-3">
+            <input type="submit" asp-controller="ToDoItem" asp-action="Delete" class="btn btn-danger" value="Delete" />
+            <input type="submit" asp-controller="ToDoItem"  asp-action="Complete" class="btn btn-primary" value="Complete" />
+        </div>
+    </form>
+}
